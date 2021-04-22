@@ -1,8 +1,11 @@
 pipeline {
-    agent { docker { image 'python:3.5.1' } }
+    agent any
     stages {
         stage('build') {
             steps {
+                sh 'apt-get update'
+                sh 'apt-get upgrade'
+                sh 'pip install python'
                 sh 'python hello.py'
             }
         }
