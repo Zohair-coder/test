@@ -1,22 +1,10 @@
 pipeline {
-    agent any
+    agent { docker { image 'python:3.5.1' } }
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                sh './gradlew build'
+                sh 'python --version'
             }
-        }
-        stage('Test') {
-            steps {
-                sh './gradlew check'
-            }
-        }
-    }
-
-    post {
-        always {
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-            junit 'build/reports/**/*.xml'
         }
     }
 }
